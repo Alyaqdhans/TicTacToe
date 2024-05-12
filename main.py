@@ -58,17 +58,17 @@ class TicTacToeGUI:
                 self.buttons[i][j].grid(row=i, column=j, padx=2, pady=2)
         self.original_color = self.buttons[0][0].cget("background")
         self.update_buttons()
+            
+        self.restart_button = tk.Button(root, text="Restart", font=('Helvetica', 12), command=self.restart)
+        self.restart_button.grid(row=3, column=0, columnspan=3, sticky='nsew', pady=5, padx=2)
 
-        self.restart_button = tk.Button(root, text="Restart", font=('Helvetica', 14), command=self.restart)
-        self.restart_button.grid(row=3, column=1, pady=10)
-
-        self.user_score_label = tk.Label(root, text=f"User Score: {self.game.user_score}", font=('Helvetica', 14, 'bold'), foreground=self.user_color)
+        self.user_score_label = tk.Label(root, text=f"User: {self.game.user_score}", font=('Helvetica', 12, 'bold'), foreground=self.user_color)
         self.user_score_label.grid(row=4, column=0, padx=10)
 
-        self.ai_score_label = tk.Label(root, text=f"AI Score: {self.game.ai_score}", font=('Helvetica', 14, 'bold'), foreground=self.ai_color)
+        self.ai_score_label = tk.Label(root, text=f"AI: {self.game.ai_score}", font=('Helvetica', 12, 'bold'), foreground=self.ai_color)
         self.ai_score_label.grid(row=4, column=2, padx=10)
 
-        self.winner_label = tk.Label(root, text="", font=('Helvetica', 16))
+        self.winner_label = tk.Label(root, text="", font=('Helvetica', 16, 'bold'))
         self.winner_label.grid(row=5, columnspan=3, pady=10)
 
         root.protocol("WM_DELETE_WINDOW", self.close_window)
@@ -100,23 +100,23 @@ class TicTacToeGUI:
                 self.buttons[i][j].configure(disabledforeground='lightgreen')
 
             if self.game.winner == 'Tie':
-                self.winner_label.configure(text="It's a Tie!", foreground='black', font=('Helvetica', 16))
+                self.winner_label.configure(text="It's a Tie!", foreground='black')
             else:
                 winner = "User" if self.game.winner == 'X' else "AI"
                 color = self.user_color if self.game.winner == 'X' else self.ai_color
-                self.winner_label.configure(text=f"{self.game.winner} wins ({winner})", foreground=color, font=('Helvetica', 16))
+                self.winner_label.configure(text=f"{self.game.winner} wins ({winner})", foreground=color)
 
                 if self.game.winner == 'X':
                     self.game.user_score += 1
                 else:
                     self.game.ai_score += 1
 
-                self.user_score_label.configure(text=f"User Score: {self.game.user_score}", foreground=self.user_color)
-                self.ai_score_label.configure(text=f"AI Score: {self.game.ai_score}", foreground=self.ai_color)
+                self.user_score_label.configure(text=f"User: {self.game.user_score}", foreground=self.user_color)
+                self.ai_score_label.configure(text=f"AI: {self.game.ai_score}", foreground=self.ai_color)
         else:
             # Check for tie
             if all(self.game.board[i][j] != ' ' for i in range(3) for j in range(3)):
-                self.winner_label.configure(text="It's a Tie!", foreground='black', font=('Helvetica', 16))
+                self.winner_label.configure(text="It's a Tie!", foreground='black')
 
     def ai_make_move(self):
         best_score = -inf
@@ -177,7 +177,7 @@ class TicTacToeGUI:
         for i in range(3):
             for j in range(3):
                 self.buttons[i][j].configure(text=' ', state='normal', background=self.original_color, disabledforeground='white')
-        self.winner_label.configure(text='', font=('Helvetica', 16))
+        self.winner_label.configure(text='')
 
     def close_window(self):
         self.root.destroy()
