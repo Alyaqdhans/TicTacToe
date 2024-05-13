@@ -97,7 +97,7 @@ class TicTacToeGUI:
         winner_line = self.game.check_winner()
         if winner_line:
             for i, j in winner_line:
-                self.buttons[i][j].configure(disabledforeground='lightgreen')
+                self.buttons[i][j].configure(disabledforeground='green')
 
             if self.game.winner == 'Tie':
                 self.winner_label.configure(text="It's a Tie!", foreground='black')
