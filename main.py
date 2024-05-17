@@ -1,3 +1,8 @@
+# made by (spring 2023-2024):
+# Alyaqdhan Zahran Alazri	(26s2025)
+# Omar Aamir Alsulaimi		(26s1930)
+
+
 import tkinter as tk
 from functools import partial
 from math import inf
